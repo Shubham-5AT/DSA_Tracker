@@ -262,23 +262,23 @@ export const Dashboard: React.FC = () => {
         </h4>
         
         {continueItem ? (
-          <div className="p-5 border border-theme-border-light dark:border-theme-border-dark rounded-lg flex items-center justify-between bg-theme-text-light/[0.01] dark:bg-theme-text-dark/[0.01] hover:border-theme-text-light/10 dark:hover:border-theme-text-dark/15 transition-all">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono tracking-wider text-accent bg-accent/5 dark:text-accent/90 dark:bg-accent/10 px-1.5 py-0.5 rounded uppercase font-semibold">
+          <div className="p-5 border border-theme-border-light dark:border-theme-border-dark rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-theme-text-light/[0.01] dark:bg-theme-text-dark/[0.01] hover:border-theme-text-light/10 dark:hover:border-theme-text-dark/15 transition-all">
+            <div className="space-y-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-mono tracking-wider text-accent bg-accent/5 dark:text-accent/90 dark:bg-accent/10 px-1.5 py-0.5 rounded uppercase font-semibold shrink-0">
                   {continueItem.typeLabel}
                 </span>
                 <span className="text-[11px] font-mono text-theme-muted-light dark:text-theme-muted-dark">
                   {continueItem.subtitle}
                 </span>
               </div>
-              <h5 className="text-[15px] font-semibold text-theme-text-light dark:text-theme-text-dark">
+              <h5 className="text-[15px] font-semibold text-theme-text-light dark:text-theme-text-dark truncate">
                 {continueItem.title}
               </h5>
             </div>
             <Link 
               to={continueItem.link} 
-              className="text-[13px] font-medium text-accent dark:text-accent/90 flex items-center gap-1 hover:gap-2 transition-all"
+              className="text-[13px] font-medium text-accent dark:text-accent/90 flex items-center gap-1 hover:gap-2 transition-all shrink-0 self-start sm:self-auto"
             >
               Resume <ArrowRight size={14} />
             </Link>

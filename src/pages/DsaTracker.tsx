@@ -339,7 +339,7 @@ export const DsaTracker: React.FC = () => {
                               </div>
                             </summary>
                             <div className="mt-2.5">
-                              <pre className="p-3 bg-theme-text-light/[0.02] dark:bg-theme-text-dark/[0.02] border border-theme-border-light dark:border-theme-border-dark rounded text-[11.5px] font-mono text-theme-text-light/95 dark:text-theme-text-dark/95 overflow-x-auto select-all leading-relaxed whitespace-pre">
+                              <pre className="p-3 bg-theme-text-light/[0.02] dark:bg-theme-text-dark/[0.02] border border-theme-border-light dark:border-theme-border-dark rounded text-[11px] font-mono text-theme-text-light/95 dark:text-theme-text-dark/95 overflow-x-auto select-all leading-relaxed whitespace-pre w-full max-w-full">
                                 {templateLanguage === 'python' ? pattern.templateCode : (pattern.templateCodeCpp || '// C++ Template not yet seeded.')}
                               </pre>
                             </div>
@@ -365,17 +365,16 @@ export const DsaTracker: React.FC = () => {
 
                           return (
                             <div key={problem.id} className="py-2.5 space-y-2">
-                              {/* Row Wrapper */}
-                              <div className="flex items-center justify-between gap-3 text-[13px]">
-                                <div className="flex items-center gap-3">
+                              {/* Row Wrapper — stacks vertically on mobile */}
+                              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[13px]">
+                                {/* Top: Checkbox + Title + Hint */}
+                                <div className="flex items-center gap-2 min-w-0">
                                   {/* Custom Checkbox */}
                                   <button
                                     onClick={() => {
                                       if (isChecked) {
-                                        // Uncheck instantly
                                         toggleDsaProblem(pattern.id, problem.id);
                                       } else {
-                                        // Open completion details modal
                                         setFeynmanText('');
                                         setTimeTaken(30);
                                         setCompletingProblem({
@@ -395,14 +394,14 @@ export const DsaTracker: React.FC = () => {
                                     href={problem.url} 
                                     target="_blank" 
                                     rel="noreferrer"
-                                    className={`font-medium inline-flex items-center gap-1 hover:text-accent dark:hover:text-accent/90 transition-all ${
+                                    className={`font-medium inline-flex items-center gap-1 hover:text-accent dark:hover:text-accent/90 transition-all min-w-0 ${
                                       isChecked ? 'completed-text' : 'text-theme-text-light dark:text-theme-text-dark'
                                     }`}
                                   >
-                                    {problem.name}
-                                    <ExternalLink size={11} className="opacity-40 hover:opacity-100 transition-opacity" />
+                                    <span className="truncate">{problem.name}</span>
+                                    <ExternalLink size={11} className="opacity-40 hover:opacity-100 transition-opacity shrink-0" />
                                     {problem.isPremium && (
-                                      <span className="text-[9px] font-mono text-theme-muted-light/60 px-1 border border-theme-border-light dark:border-theme-border-dark rounded">
+                                      <span className="text-[9px] font-mono text-theme-muted-light/60 px-1 border border-theme-border-light dark:border-theme-border-dark rounded shrink-0">
                                         Premium
                                       </span>
                                     )}
@@ -427,8 +426,8 @@ export const DsaTracker: React.FC = () => {
                                   </button>
                                 </div>
 
-                                {/* Badges & Action Buttons */}
-                                <div className="flex items-center gap-2">
+                                {/* Badges & Action Buttons row — wraps below title on mobile */}
+                                <div className="flex flex-wrap items-center gap-2 pl-7 sm:pl-0">
                                   {/* Difficulty */}
                                   <span className={`px-2 py-0.5 border text-[10px] font-mono rounded-full font-medium ${diffClass}`}>
                                     {problem.difficulty}

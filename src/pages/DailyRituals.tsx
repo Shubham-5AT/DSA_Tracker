@@ -170,7 +170,7 @@ export const DailyRituals: React.FC = () => {
         
         <div className="border border-theme-border-light dark:border-theme-border-dark rounded-lg divide-y divide-theme-border-light dark:divide-theme-border-dark bg-theme-text-light/[0.005] dark:bg-theme-text-dark/[0.005]">
           {/* DSA Goal */}
-          <div className="p-4 flex items-center justify-between gap-4">
+          <div className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div className="flex items-start gap-3">
               <div className={`custom-checkbox mt-0.5 shrink-0 ${isDsaGoalMet ? 'checked' : 'border-dashed cursor-not-allowed opacity-60'}`}>
                 {isDsaGoalMet && <Check size={11} strokeWidth={3} />}
@@ -184,13 +184,13 @@ export const DailyRituals: React.FC = () => {
                 </p>
               </div>
             </div>
-            <span className="font-mono text-[12px] text-theme-muted-light dark:text-theme-muted-dark">
+            <span className="font-mono text-[12px] text-theme-muted-light dark:text-theme-muted-dark shrink-0 pl-7 sm:pl-0">
               {dsaSolved} / {dsaTarget} solved
             </span>
           </div>
 
           {/* Spaced Repetition Goal */}
-          <div className="p-4 flex items-center justify-between gap-4">
+          <div className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div className="flex items-start gap-3">
               <div className={`custom-checkbox mt-0.5 shrink-0 ${isReviewsGoalMet ? 'checked' : 'border-dashed cursor-not-allowed opacity-60'}`}>
                 {isReviewsGoalMet && <Check size={11} strokeWidth={3} />}
@@ -204,7 +204,7 @@ export const DailyRituals: React.FC = () => {
                 </p>
               </div>
             </div>
-            <span className="font-mono text-[12px] text-theme-muted-light dark:text-theme-muted-dark">
+            <span className="font-mono text-[12px] text-theme-muted-light dark:text-theme-muted-dark shrink-0 pl-7 sm:pl-0">
               {dueReviewsCount > 0 ? `${dueReviewsCount} reviews pending` : 'All cleared'}
             </span>
           </div>
@@ -214,7 +214,7 @@ export const DailyRituals: React.FC = () => {
             const isChecked = !!dailyRitualsChecked[`${today}::${goal}`];
 
             return (
-              <div key={goal} className="p-4 flex items-center justify-between gap-4 group">
+              <div key={goal} className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 group">
                 <div className="flex items-start gap-3">
                   <button
                     onClick={() => toggleCustomGoalChecked(today, goal)}
@@ -232,7 +232,7 @@ export const DailyRituals: React.FC = () => {
                 {/* Quick Delete */}
                 <button
                   onClick={() => removeCustomGoal(goal)}
-                  className="p-1 rounded text-theme-muted-light/30 hover:text-badge-hard-text hover:bg-badge-hard-bgLight/40 dark:hover:bg-badge-hard-bgDark/30 opacity-0 group-hover:opacity-100 transition-all"
+                  className="p-1 rounded text-theme-muted-light/30 hover:text-badge-hard-text hover:bg-badge-hard-bgLight/40 dark:hover:bg-badge-hard-bgDark/30 opacity-0 group-hover:opacity-100 transition-all self-end sm:self-auto"
                   title="Remove daily ritual habit"
                 >
                   <Trash2 size={13} />

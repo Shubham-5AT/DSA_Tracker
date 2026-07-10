@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --sidebar-expanded-w: 240px;
+    --sidebar-collapsed-w: 64px;
+  }
+
   html, body {
     @apply bg-theme-bg-light text-theme-text-light transition-colors duration-300 min-h-screen font-sans antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -11,6 +16,15 @@
     @apply bg-theme-bg-dark text-theme-text-dark;
   }
 }
+
+/* On mobile, remove sidebar left padding from main wrapper */
+@media (max-width: 767px) {
+  [style*="--sidebar-expanded-w"],
+  [style*="--sidebar-collapsed-w"] {
+    padding-left: 0 !important;
+  }
+}
+
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
