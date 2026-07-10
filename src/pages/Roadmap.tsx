@@ -194,7 +194,7 @@ export const Roadmap: React.FC = () => {
                             )}
 
                             {/* Label */}
-                            <div className="space-y-0.5 flex-1">
+                            <div className="space-y-1.5 flex-1">
                               <p className={`font-medium ${
                                 isChecked 
                                   ? 'completed-text' 
@@ -207,6 +207,17 @@ export const Roadmap: React.FC = () => {
                                   </span>
                                 )}
                               </p>
+
+                              {/* Subparts details */}
+                              {item.subitems && item.subitems.length > 0 && (
+                                <ul className="pl-4 list-disc space-y-1 text-[12px] text-theme-muted-light dark:text-theme-muted-dark leading-relaxed">
+                                  {item.subitems.map((sub) => (
+                                    <li key={sub.id} className="marker:text-accent/50 dark:marker:text-accent/30">
+                                      {sub.text}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </div>
                           </div>
                         );
