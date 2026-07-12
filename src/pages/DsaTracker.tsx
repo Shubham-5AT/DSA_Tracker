@@ -11,7 +11,9 @@ import {
   ExternalLink,
   Check,
   Bookmark,
-  HelpCircle
+  HelpCircle,
+  BookOpen,
+  Copy
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -71,6 +73,9 @@ export const DsaTracker: React.FC = () => {
 
   // 7. Template Language Toggle
   const [templateLanguage, setTemplateLanguage] = useState<'python' | 'cpp'>('python');
+
+  // 8. Copied ChatGPT Prompt State
+  const [copiedPromptId, setCopiedPromptId] = useState<string | null>(null);
 
   // 8. Detect and trigger pattern completion pulse
   useEffect(() => {
@@ -302,6 +307,47 @@ export const DsaTracker: React.FC = () => {
                       transition={{ duration: 0.2, ease: 'easeInOut' }}
                       className="overflow-hidden border-t border-theme-border-light/50 dark:border-theme-border-dark/50"
                     >
+                      {/* Prerequisites Section */}
+                      {pattern.prerequisites && pattern.prerequisites.length > 0 && (
+                        <div className="px-5 py-3 border-b border-theme-border-light/40 dark:border-theme-border-dark/40 bg-accent/[0.02] dark:bg-accent/[0.01] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[12.5px]">
+                          <div className="flex flex-col sm:flex-row sm:items-baseline gap-x-2 gap-y-1">
+                            <span className="text-[11px] uppercase tracking-wider font-semibold text-accent/90 dark:text-accent/80 shrink-0 flex items-center gap-1.5 select-none">
+                              <BookOpen size={13} className="text-accent" />
+                              Prerequisites:
+                            </span>
+                            <span className="text-theme-text-light/80 dark:text-theme-text-dark/80 italic font-serif">
+                              "Explain {pattern.prerequisites.join(', ')} in simple terms so I can understand {pattern.name}."
+                            </span>
+                          </div>
+                          
+                          <button
+                            onClick={() => {
+                              const promptText = `Explain the following prerequisite concepts: ${pattern.prerequisites?.join(', ')} in simple terms with examples, so that I can understand and solve DSA problems on the "${pattern.name}" pattern.`;
+                              navigator.clipboard.writeText(promptText);
+                              setCopiedPromptId(pattern.id);
+                              setTimeout(() => setCopiedPromptId(null), 2000);
+                            }}
+                            className={`flex items-center gap-1.5 px-3 py-1 rounded text-[11px] font-medium border transition-all shrink-0 select-none ${
+                              copiedPromptId === pattern.id
+                                ? 'bg-badge-easy-bgLight border-badge-easy-borderLight text-badge-easy-text dark:bg-badge-easy-bgDark dark:border-badge-easy-borderDark'
+                                : 'bg-theme-bg-light dark:bg-theme-bg-dark border-theme-border-light dark:border-theme-border-dark hover:border-accent text-accent dark:text-accent/90 hover:bg-accent/5'
+                            }`}
+                          >
+                            {copiedPromptId === pattern.id ? (
+                              <>
+                                <Check size={11} className="text-badge-easy-text" />
+                                Prompt Copied!
+                              </>
+                            ) : (
+                              <>
+                                <Copy size={11} className="text-accent dark:text-accent/90" />
+                                Copy ChatGPT Prompt
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      )}
+
                       {/* Pattern Template Section */}
                       {(pattern.templateCode || pattern.templateCodeCpp) && (
                         <div className="px-5 py-3 border-b border-theme-border-light/40 dark:border-theme-border-dark/40 bg-theme-text-light/[0.005] dark:bg-theme-text-dark/[0.005]">

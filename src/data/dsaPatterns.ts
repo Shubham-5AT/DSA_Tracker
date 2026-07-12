@@ -14,6 +14,7 @@ export interface Pattern {
   id: string;
   name: string;
   description: string;
+  prerequisites?: string[];
   templateCode?: string;
   templateCodeCpp?: string;
   problems: Problem[];
@@ -24,6 +25,7 @@ export const dsaPatterns: Pattern[] = [
     id: "trees",
     name: "Trees",
     description: "Hierarchical traversals (DFS/BFS), binary search tree algorithms, and parent-child tracking.",
+    prerequisites: ["Recursion", "Stack & Queues", "Basic Tree Definitions"],
     templateCode: `# Template: DFS Traversal (Post-order example)
 def dfs(root):
     if not root:
@@ -60,6 +62,7 @@ int dfs(TreeNode* root) {
     id: "graphs",
     name: "Graphs (BFS/DFS/Union-Find)",
     description: "Node connections, pathfinding, topological sorting, and cycle checks in networks.",
+    prerequisites: ["Recursion", "Trees (DFS/BFS)", "Stack & Queues", "Adjacency List/Matrix"],
     templateCode: `# Template: BFS Shortest Path Traversal
 from collections import deque
 def bfs(start_node, graph):
@@ -106,6 +109,7 @@ void bfs(int start, const vector<vector<int>>& adj) {
     id: "dynamic-programming",
     name: "Dynamic Programming",
     description: "Resolving overlapping subproblems by storing intermediate computed states (memoization/tabulation).",
+    prerequisites: ["Recursion", "Memoization", "Arrays & 2D Grid Traversals"],
     templateCode: `# Template: 1D / 2D Tabulation (Coin Change / LCS example)
 def dp_tabulation(items, target):
     dp = [float('inf')] * (target + 1)
@@ -149,6 +153,7 @@ int dp_tabulation(const vector<int>& items, int target) {
     id: "sliding-window",
     name: "Sliding Window",
     description: "Maintaining a subsegment of elements dynamically to track range properties.",
+    prerequisites: ["Arrays & Hashing", "Two Pointers", "Subarrays"],
     templateCode: `# Template: Variable-Size Sliding Window
 def sliding_window(arr, condition):
     left = 0
@@ -195,6 +200,7 @@ int sliding_window(const vector<int>& arr) {
     id: "two-pointers",
     name: "Two Pointers",
     description: "Iterating elements from both ends or distinct rates to solve sorted/un-sorted arrays.",
+    prerequisites: ["Arrays & Hashing", "Linear Traversal"],
     templateCode: `# Template: Two Pointers (Sorted array checks)
 def two_pointers(arr, target):
     left, right = 0, len(arr) - 1
@@ -236,6 +242,7 @@ vector<int> two_pointers(const vector<int>& arr, int target) {
     id: "heaps-priority-queues",
     name: "Heaps & Priority Queues",
     description: "Min/Max heaps for immediate access to extrema values in stream or collection processing.",
+    prerequisites: ["Binary Trees", "Array Representation of Trees", "Sorting"],
     templateCode: `# Template: K-th Extrema stream tracking
 import heapq
 def track_kth_largest(stream, k):
@@ -273,6 +280,7 @@ int track_kth_largest(const vector<int>& stream, int k) {
     id: "backtracking",
     name: "Backtracking",
     description: "Systematic building, testing, and discarding of path options (recursion + state restoration).",
+    prerequisites: ["Recursion (Base Cases & Choices)", "Call Stack Concepts"],
     templateCode: `# Template: DFS Combinatorial Backtracking
 def backtrack(start_index, path, result):
     if base_case_met:
@@ -318,6 +326,7 @@ void backtrack(int start, vector<int>& path, vector<vector<int>>& result, const 
     id: "advanced-graphs",
     name: "Advanced Graphs",
     description: "Shortest paths (Dijkstra), minimum spanning trees (Prim/Kruskal), and network flows.",
+    prerequisites: ["Basic Graphs (BFS/DFS)", "Heaps & Priority Queues", "Greedy Algorithms"],
     templateCode: `# Template: Dijkstra's Shortest Path Algorithm
 import heapq
 def dijkstra(start, graph):
@@ -362,6 +371,7 @@ vector<int> dijkstra(int start, const vector<vector<pair<int, int>>>& adj) {
     id: "intervals",
     name: "Intervals",
     description: "Processing overlapping ranges, schedules, and start-end coordinates.",
+    prerequisites: ["Sorting (Custom Comparators)", "Arrays & Hashing"],
     templateCode: `# Template: Intervals Overlaps check
 def merge_intervals(intervals):
     intervals.sort(key=lambda x: x[0])
@@ -395,6 +405,7 @@ vector<vector<int>> merge_intervals(vector<vector<int>>& intervals) {
     id: "tries",
     name: "Tries",
     description: "Prefix tree structures optimized for character-level matching, retrieval, and auto-complete.",
+    prerequisites: ["Trees (Node Children Concepts)", "String Properties", "Recursion"],
     templateCode: `# Template: Trie Node Class insertion
 class TrieNode:
     def __init__(self):
@@ -445,6 +456,7 @@ public:
     id: "monotonic-stack",
     name: "Monotonic Stack",
     description: "Maintains elements in a sorted stack order to answer range queries in linear time.",
+    prerequisites: ["Stacks", "Arrays & Hashing"],
     templateCode: `# Template: Next Greater Element using monotonic stack
 def next_greater(arr):
     stack = [] # indices in decreasing element values
@@ -478,6 +490,7 @@ vector<int> next_greater(const vector<int>& arr) {
     id: "greedy",
     name: "Greedy",
     description: "Making locally optimal choices at each step with the goal of finding a global optimum.",
+    prerequisites: ["Sorting", "Arrays & Hashing", "Basic Math Induction"],
     templateCode: `# Template: End-time interval sorting greedy
 def max_jobs(jobs):
     jobs.sort(key=lambda x: x[1]) # sort by end time
@@ -520,6 +533,7 @@ int max_jobs(vector<pair<int, int>>& jobs) {
     id: "cyclic-sort",
     name: "Cyclic Sort",
     description: "Sorting elements mapping precisely in the range 1 to N in linear O(n) runtime.",
+    prerequisites: ["Arrays (In-place Swap)", "Two Pointers"],
     templateCode: `# Template: Cyclic sort in-place placement
 def cyclic_sort(arr):
     i = 0
@@ -554,6 +568,7 @@ void cyclic_sort(vector<int>& arr) {
     id: "binary-search",
     name: "Binary Search",
     description: "Dividing search space in half repeatedly to achieve logarithmic lookups.",
+    prerequisites: ["Sorted Arrays", "Two Pointers (Bounds)", "Basic Division Logic"],
     templateCode: `# Template: Sorted Binary Search index query
 def binary_search(arr, target):
     left, right = 0, len(arr) - 1
@@ -595,6 +610,7 @@ int binary_search(const vector<int>& arr, int target) {
     id: "stack-queues",
     name: "Stack & Queues",
     description: "Last-In-First-Out (LIFO) and First-In-First-Out (FIFO) behaviors for sequencing.",
+    prerequisites: ["Arrays & Hashing", "LIFO / FIFO Concepts"],
     templateCode: `# Template: Standard stack LIFO push/pop evaluation
 def evaluate(expression):
     stack = []
@@ -637,6 +653,7 @@ int evaluate(const string& tokens) {
     id: "linked-lists",
     name: "Linked Lists",
     description: "Singly, doubly, and circular node manipulation including reversal and cycle checks.",
+    prerequisites: ["Pointers / Object References", "Custom Class Definitions", "Basic Loops"],
     templateCode: `# Template: Linked List Pointer Reversal
 def reverse_list(head):
     prev = None
@@ -677,6 +694,7 @@ ListNode* reverse_list(ListNode* head) {
     id: "arrays-hashing",
     name: "Arrays & Hashing",
     description: "Frequency counters, prefix sums, hash maps, and linear scans.",
+    prerequisites: ["Loops & Conditionals", "Variable Manipulation", "Basic Key-Value Concepts"],
     templateCode: `# Template: Target offset check using hash map
 def two_sum(nums, target):
     seen = {}
@@ -715,6 +733,7 @@ vector<int> two_sum(const vector<int>& nums, int target) {
     id: "bit-manipulation",
     name: "Bit Manipulation",
     description: "Using binary XOR, AND, OR operators to solve problems at the register level.",
+    prerequisites: ["Binary Number Representation", "Bitwise Operators (AND, OR, XOR, Shifts)"],
     templateCode: `# Template: Bitwise XOR duplicates cancellation
 def single_number(nums):
     res = 0
